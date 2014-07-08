@@ -78,7 +78,6 @@
 
 				try {
 					client = response.raw = new XMLHttpRequest();
-					client.open(method, url, true);
 
 					if (request.mixin) {
 						Object.keys(request.mixin).forEach(function (prop) {
@@ -89,6 +88,8 @@
 							}
 						});
 					}
+
+					client.open(method, url, true);
 
 					headers = request.headers;
 					for (headerName in headers) {
