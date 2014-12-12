@@ -38,24 +38,7 @@
 			queryStringParams = {};
 
 			if (params) {
-				for (name in params) {
-					/*jshint forin:false */
-					re = new RegExp('\\{' + name + '\\}');
-					if (re.test(url)) {
-						url = url.replace(re, encodeURIComponent(params[name]), 'g');
-					}
-					else {
-						queryStringParams[name] = params[name];
-					}
-				}
-				for (name in queryStringParams) {
-					url += url.indexOf('?') === -1 ? '?' : '&';
-					url += encodeURIComponent(name);
-					if (queryStringParams[name] !== null && queryStringParams[name] !== undefined) {
-						url += '=';
-						url += encodeURIComponent(queryStringParams[name]);
-					}
-				}
+				url += '?' + require('qs').stringify(params);
 			}
 			return url;
 		}
